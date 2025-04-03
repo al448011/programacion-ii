@@ -1,0 +1,11 @@
+10
+ 1  1 2 Restaurante_Hermanos_Zafón
+ 3 10 2 Asador_Pizzería_Marisol
+20  3 5 Restaurante_Antoxo
+25  5 3 Tu_Sushi
+22 19 4 La_Cuina_de_Fernando
+ 2 15 1 The_Fitzgerald_Burger_Company
+15 15 5 Restaurante_Luisy
+22 19 3 Restaurante_Corpore_Sano
+20 18 3 Restaurante_Marade
+10 22 2 Restaurante_Pairal
