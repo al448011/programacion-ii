@@ -15,9 +15,9 @@ public class Restaurante {
     // Constructores
 
     public Restaurante(String nombre, Punto posición, int valoración){
-        nombre = this.nombre;
-        posición = this.posición;
-        valoración = this.valoración;
+        this.nombre = nombre;
+        this.posición = posición;
+        this.valoración = valoración;
     }
 
     // Métodos
@@ -43,6 +43,8 @@ public class Restaurante {
             String nombre = fichero.next();
 
             vectorRestaurantes[i] = new Restaurante(nombre, posición, valoración);
+            // System.out.println(vectorRestaurantes[i]);
+            // System.out.println("posición: " + vectorRestaurantes[i].posición + "\nvaloración: " + vectorRestaurantes[i].valoración + "\nnombre: " + vectorRestaurantes[i].nombre + "\n");
         }
 
         System.out.println(Arrays.toString(vectorRestaurantes));;
@@ -54,5 +56,4 @@ public class Restaurante {
 //        String rutaFichero = "G:\\Mi unidad\\EI1008 - Programación II\\programacion-ii\\src\\practica2\\ficherosAuxiliares\\restaurantes.txt";
 //        Restaurante[] restaurantes = Restaurante.leeRestaurantes(rutaFichero);
 //    }
-
 }
