@@ -8,7 +8,7 @@ public class RestauranteMasProximo {
         Scanner teclado = new Scanner(System.in);
 
         System.out.print("Introduce el nombre del fichero de restaurantes: ");
-        String nombreFichero = teclado.next();
+        String nombreFichero = "G:\\Mi unidad\\EI1008 - Programación II\\programacion-ii\\src\\practica2\\ficherosAuxiliares\\" + teclado.next();
         Restaurante[] restaurantes = Restaurante.leeRestaurantes(nombreFichero);
 
         System.out.println("Indique su posición actual");
