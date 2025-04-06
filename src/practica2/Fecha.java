@@ -5,6 +5,9 @@ import java.util.Calendar;
 public class Fecha {
     // Atributos
 
+    public static final int PRIMER_AÑO = 1800;
+    public static final int ÚLTIMO_AÑO = 2500;
+
     private int día;
     private int mes;
     private int año;
