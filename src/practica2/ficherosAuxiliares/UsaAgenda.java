@@ -1,7 +1,5 @@
 package practica2;
 
-import java.util.Scanner;
-
 public class UsaAgenda {
     public static void main(String[] args) {
         // Usamos el constructor

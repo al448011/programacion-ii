@@ -61,16 +61,16 @@ public class Agenda {
     }
 
     public void borrarPasadas(Fecha fecha){
-        int cantidadPasadas = 0;
+        int cantidadNoEliminadas = 0;
 
         for (Tarea elementoTarea : vectorTareas){
             if (elementoTarea.getFecha().compareTo(fecha) < 0)
-                cantidadPasadas++;
+                cantidadNoEliminadas++;
         }
 
-        Tarea[] nuevoVectorTareas = new Tarea[vectorTareas.length - cantidadPasadas];
+        Tarea[] nuevoVectorTareas = new Tarea[cantidadNoEliminadas];
 
-        for (int i = 0; i < vectorTareas.length; i++){
+        for (int i = 0; i < cantidadNoEliminadas; i++){
             if(vectorTareas[i].getFecha().compareTo(fecha) >= 0)
                 nuevoVectorTareas[i] = vectorTareas[i];
         }
@@ -84,8 +84,12 @@ public class Agenda {
     }
 
     public String toString(){
+        String resultado = "";
+
         for (Tarea elementoTarea : vectorTareas){
-            return elementoTarea.toString();
+            resultado += elementoTarea.toString() + "\n";
         }
+
+        return resultado;
     }
 }
