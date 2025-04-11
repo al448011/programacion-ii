@@ -24,25 +24,24 @@ public class LineaPoligonal {
             for (int i = 0; i < vectorPuntos.length; i++){
                 nuevoVectorPuntos[i] = vectorPuntos[i];
             }
-        } else {
-            // si la talla no es igual a la cantidad de puntos
-            int j = 0;
-            // recorro el vector hasta que haya un espacio libre
-            while (vectorPuntos[j] != null)
-                j++;
-            // en esta nueva posición que hay libre pongo el punto
-            punto = vectorPuntos[j];
+            vectorPuntos = nuevoVectorPuntos;
         }
+        // añadir el nuevo punto en la posición de la cantidad de puntos
+        vectorPuntos[cantidadPuntos] = punto;
         // como estamos añadiendo sumamos uno a la cantidad de puntos
         cantidadPuntos++;
     }
 
     public void quitar(int posición){
         if (posición >= 0 && posición < cantidadPuntos){
-            for (int i = 0; i < vectorPuntos.length; i++){
-                if (i >= posición)
-                    vectorPuntos[i] = vectorPuntos[i + 1];
+            // Desplazar todos los puntos una posición hacia atrás
+            for (int i = posición; i < cantidadPuntos - 1; i++) {
+                vectorPuntos[i] = vectorPuntos[i + 1];
             }
+        }
+        // Eliminar la referencia al último punto válido
+        if (cantidadPuntos > 0) {
+            vectorPuntos[cantidadPuntos - 1] = null;
         }
         cantidadPuntos--;
     }
@@ -59,27 +58,28 @@ public class LineaPoligonal {
     }
 
     public void trasladar(double desplazamientoX, double desplazamientoY){
-        for (Punto punto : vectorPuntos)
-            punto.desplazar(desplazamientoX, desplazamientoY);
+        for (int i = 0; i < cantidadPuntos; i++)
+            vectorPuntos[i].desplazar(desplazamientoX, desplazamientoY);
     }
 
     public double longitud(){
         if (cantidadPuntos >= 2){
             double longitud = 0;
 
-            for (int i = 1; i <= cantidadPuntos; i++){
+            for (int i = 1; i < cantidadPuntos; i++){
                 longitud += vectorPuntos[i].distancia(vectorPuntos[i-1]);
             }
-
             return longitud;
         }else
             return 0;
     }
 
     public String toString(){
+        if (cantidadPuntos == 0) return "Línea vacía";
+
         String resultado = "";
 
-        for (int i = 0; i <= cantidadPuntos; i++){
+        for (int i = 0; i < cantidadPuntos; i++){
             if (i == 0)
                 resultado += vectorPuntos[i];
             else
@@ -88,7 +88,6 @@ public class LineaPoligonal {
 
         return resultado;
     }
-
     public boolean equals(Object otroObjeto){
         if (this == otroObjeto) return true;
         if (!(otroObjeto instanceof Punto)) return false;
