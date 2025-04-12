@@ -39,27 +39,25 @@ public class LineaPoligonal {
                 vectorPuntos[i] = vectorPuntos[i + 1];
             }
         }
-        // Eliminar la referencia al último punto válido
-        if (cantidadPuntos > 0) {
-            vectorPuntos[cantidadPuntos - 1] = null;
-        }
+
+        vectorPuntos[cantidadPuntos - 1] = null;
         cantidadPuntos--;
     }
 
     public void quitar(Punto punto){
         int aparece = 0;
 
-        for (int i = 0; i < vectorPuntos.length; i++){
+        for (int i = 0; i < cantidadPuntos; i++){
             if (punto.equals(vectorPuntos[i]) && aparece == 0){
                 quitar(i);
-                aparece++;
+                break;
             }
         }
     }
 
     public void trasladar(double desplazamientoX, double desplazamientoY){
         for (int i = 0; i < cantidadPuntos; i++)
-            vectorPuntos[i].desplazar(desplazamientoX, desplazamientoY);
+            vectorPuntos[i] = vectorPuntos[i].desplazar(desplazamientoX, desplazamientoY);
     }
 
     public double longitud(){
@@ -75,7 +73,8 @@ public class LineaPoligonal {
     }
 
     public String toString(){
-        if (cantidadPuntos == 0) return "Línea vacía";
+        if (cantidadPuntos == 0)
+            return "";
 
         String resultado = "";
 
@@ -85,21 +84,19 @@ public class LineaPoligonal {
             else
                 resultado += "--" + vectorPuntos[i];
         }
-
         return resultado;
     }
     public boolean equals(Object otroObjeto){
         if (this == otroObjeto) return true;
-        if (!(otroObjeto instanceof Punto)) return false;
+        if (!(otroObjeto instanceof LineaPoligonal)) return false;
 
-        Punto[] otroVectorPuntos = (Punto[]) otroObjeto;
+        LineaPoligonal otroVectorPuntos = (LineaPoligonal) otroObjeto;
 
-        if (vectorPuntos.length == otroVectorPuntos.length){
-            for (int i = 0; i < vectorPuntos.length; i++){
-                if (!vectorPuntos[i].equals(otroVectorPuntos[i]))
+        if (cantidadPuntos == otroVectorPuntos.cantidadPuntos){
+            for (int i = 0; i < cantidadPuntos; i++){
+                if (!this.vectorPuntos[i].equals(otroVectorPuntos.vectorPuntos[i]))
                     return false;
             }
-
             return true;
         } else
             return false;
