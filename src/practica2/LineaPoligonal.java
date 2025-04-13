@@ -38,10 +38,11 @@ public class LineaPoligonal {
             for (int i = posición; i < cantidadPuntos - 1; i++) {
                 vectorPuntos[i] = vectorPuntos[i + 1];
             }
-        }
-
         vectorPuntos[cantidadPuntos - 1] = null;
         cantidadPuntos--;
+        }
+
+
     }
 
     public void quitar(Punto punto){
