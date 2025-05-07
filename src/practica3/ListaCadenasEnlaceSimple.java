@@ -132,16 +132,13 @@ public class ListaCadenasEnlaceSimple implements ListaCadenas {
 
         if (i < 0 || i >= size()) throw new IndexOutOfBoundsException();
 
-        Nodo auxPrimera = primero;
-        Nodo auxSegunda = primero.sig;
+        Nodo aux = primero;
 
         for (int j = 0; j < i; j++){
-            auxPrimera = auxSegunda;
-            auxSegunda = auxSegunda.sig;
+            aux = aux.sig;
         }
-
-        auxSegunda.dato = s;
-        return auxPrimera.dato;
+        aux.sig.dato = s;
+        return aux.dato;
     }
 
     public int size() {
