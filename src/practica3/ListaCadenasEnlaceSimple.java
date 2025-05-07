@@ -105,8 +105,23 @@ public class ListaCadenasEnlaceSimple implements ListaCadenas {
         return primero == null;
     }
 
-    public String remove(int i) {
-        return "";
+    public String remove(int i) throws IndexOutOfBoundsException {
+        if (i < 0 || i >= size()) throw new IndexOutOfBoundsException();
+
+        String stringEliminado;
+
+        if (i == 0){
+            stringEliminado = primero.dato;
+            primero = primero.sig;
+        } else {
+            Nodo aux = primero;
+            for (int j = 0; j < i - 1; j++)
+                aux = aux.sig;
+            stringEliminado = aux.sig.dato;
+            aux.sig = aux.sig.sig;
+        }
+        talla--;
+        return stringEliminado;
     }
 
     public boolean remove(String s) {
@@ -215,5 +230,21 @@ public class ListaCadenasEnlaceSimple implements ListaCadenas {
                 lista.clear();
             }
         }
+
+        System.out.println();
+
+        // probando remove(int i)
+        lista.add("cero");
+        lista.add("uno");
+        lista.add("dos");
+        lista.add("tres");
+        lista.add("cuatro");
+
+        System.out.println("Probando método remove(int i):");
+        System.out.println(lista);
+        System.out.println(lista.remove(1));
+        System.out.println(lista.remove(0));
+        System.out.println(lista);
+        System.out.println();
     }
 }
