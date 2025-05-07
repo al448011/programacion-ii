@@ -115,21 +115,55 @@ public class ListaCadenasEnlaceSimple implements ListaCadenas {
         Nodo auxActual = primero.sig;
 
         for (int i = 1; i < talla - 1; i++){
-            if (Objects.equals(auxActual.dato,s)){
-
+            if (Objects.equals(auxAnterior.dato,s)){
+                for (int j = i; i < talla - 1; j++){
+                    auxAnterior = auxActual.sig;
+                }
+                return true;
+            } else {
+                auxAnterior = auxActual;
+                auxActual = auxActual.sig;
             }
-
-
         }
-
         return false;
     }
 
-    public String set(int i, String s) {
-        return "";
+    public String set(int i, String s) throws IndexOutOfBoundsException {
+
+        if (i < 0 || i >= size()) throw new IndexOutOfBoundsException();
+
+        Nodo auxPrimera = primero;
+        Nodo auxSegunda = primero.sig;
+
+        for (int j = 0; j < i; j++){
+            auxPrimera = auxSegunda;
+            auxSegunda = auxSegunda.sig;
+        }
+
+        auxSegunda.dato = s;
+        return auxPrimera.dato;
     }
 
     public int size() {
-        return 0;
+
+        Nodo aux = primero;
+        int size = 0;
+
+        while (aux.sig != null)
+            size++;
+
+        return size;
+    }
+
+    public String toString(){
+
+        Nodo aux = primero;
+        String string = "[";
+
+        for (int i = 0; i < talla - 2; i++){
+            string += aux.dato + ", ";
+            aux = primero.sig;
+        }
+        return string + aux.dato + "]";
     }
 }
