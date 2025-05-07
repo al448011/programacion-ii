@@ -1,5 +1,7 @@
 package practica3;
 
+import java.util.Objects;
+
 public class ListaCadenasEnlaceSimple implements ListaCadenas {
 
     // Clase anidada
@@ -41,37 +43,85 @@ public class ListaCadenasEnlaceSimple implements ListaCadenas {
             add(s);
         else {
             Nodo aux = primero;
-            for (int j = 0; j < i - 1; j++){
+            for (int j = 0; j < i - 1; j++)
                 aux = aux.sig;
-            }
+
+            Nodo nuevo = new Nodo(s,aux);
+
+            talla++;
         }
     }
 
     public void clear() {
-
+        primero = null;
+        talla = 0;
     }
 
-    public String get(int i) {
-        return "";
+    public String get(int i) throws IndexOutOfBoundsException {
+        if (i < 0 || i >= size()) throw new IndexOutOfBoundsException();
+
+        Nodo aux = primero;
+        for (int j = 0; j != i; j++)
+            aux = aux.sig;
+
+        return aux.dato;
     }
 
     public int indexOf(String s) {
-        return 0;
+        Nodo aux = primero;
+        for (int i = 0; i < talla - 1; i++){
+            if (Objects.equals(s, aux.dato))
+                return i;
+        }
+        return -1;
     }
 
     public int lastIndexOf(String s) {
-        return 0;
+        Nodo aux = primero;
+        int últimaOcurrencia = -1;
+
+        for (int i = 0; i < talla - 1; i++){
+            if (Objects.equals(s, aux.dato))
+                últimaOcurrencia = i;
+        }
+
+        return últimaOcurrencia;
     }
 
     public boolean isEmpty() {
-        return false;
+        talla = 0;
+        return primero != null;
     }
 
-    public String remove(int i) {
-        return "";
+    public String remove(int i) throws IndexOutOfBoundsException{
+
+        if (i < 0 || i >= size()) throw new IndexOutOfBoundsException();
+
+        Nodo auxAnterior = primero;
+        Nodo auxActual = auxAnterior.sig;
+
+        for (int j = 0; j != i; j++){
+            auxAnterior = auxActual;
+            auxActual = auxActual.sig;
+        }
+
+        auxActual.sig = auxAnterior;
+        return auxActual.dato;
     }
 
     public boolean remove(String s) {
+
+        Nodo auxAnterior = primero;
+        Nodo auxActual = primero.sig;
+
+        for (int i = 1; i < talla - 1; i++){
+            if (Objects.equals(auxActual.dato,s)){
+
+            }
+
+
+        }
+
         return false;
     }
 
