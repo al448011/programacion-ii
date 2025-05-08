@@ -125,11 +125,48 @@ public class ListaCadenasEnlaceSimple implements ListaCadenas {
     }
 
     public boolean remove(String s) {
+        // en caso que la lista esté vacía
+        if (primero == null) return false;
+
+        // en caso de que sea el primero
+        if (Objects.equals(primero.dato, s)){
+            primero = primero.sig;
+            talla--;
+            return true;
+        }
+
+        // para cualquier otro caso
+        Nodo aux = primero;
+
+        while (aux.sig != null){
+            if (Objects.equals(s, aux.dato)){
+                aux.sig = aux.sig.sig;
+                talla--;
+                return true;
+            }
+            aux = aux.sig;
+        }
         return false;
     }
 
-    public String set(int i, String s) {
-        return "";
+    public String set(int i, String s) throws IndexOutOfBoundsException{
+        if (i < 0 || i >= size()) throw new IndexOutOfBoundsException();
+
+        Nodo aux = primero;
+
+        if (i == 0){
+            String resultado = primero.dato;
+            primero.dato = s;
+            return resultado;
+        }
+
+        for (int j = 0; j < i; j++)
+            aux = aux.sig;
+
+        String resultado = aux.dato;
+        aux.dato = s;
+
+        return resultado;
     }
 
     public int size() {
@@ -160,7 +197,7 @@ public class ListaCadenasEnlaceSimple implements ListaCadenas {
         lista.add("uno");
         lista.add("dos");
         lista.add("tres");
-        System.out.println(lista);
+        System.out.println(lista + " Talla: " + lista.size());
         System.out.println();
 
         // probando add(int i, String s)
@@ -168,14 +205,14 @@ public class ListaCadenasEnlaceSimple implements ListaCadenas {
         lista.add(0, "cero");
         lista.add(4, "cuatro");
         // lista.add(6, "seis");
-        System.out.println(lista);
+        System.out.println(lista + " Talla: " + lista.size());
 
         System.out.println();
 
         // probando clear()
         System.out.println("Probando método clear():");
         lista.clear();
-        System.out.println(lista);
+        System.out.println(lista + " Talla: " + lista.size());
 
         System.out.println();
 
@@ -209,7 +246,7 @@ public class ListaCadenasEnlaceSimple implements ListaCadenas {
         lista.add("cuatro");
 
         System.out.println("Probando método indexOf(String s):");
-        System.out.println(lista);
+        System.out.println(lista + " Talla: " + lista.size());
         System.out.println(lista.lastIndexOf("cero"));
         System.out.println(lista.lastIndexOf("dos"));
         System.out.println(lista.lastIndexOf("cinco"));
@@ -222,10 +259,10 @@ public class ListaCadenasEnlaceSimple implements ListaCadenas {
 
         for (int i = 0; i < 2; i++){
             if (lista.isEmpty()) {
-                System.out.println(lista);
+                System.out.println(lista + " Talla: " + lista.size());
                 System.out.println("La lista está vacía.");
             } else {
-                System.out.println(lista);
+                System.out.println(lista + " Talla: " + lista.size());
                 System.out.println("La lista NO está vacía.");
                 lista.clear();
             }
@@ -241,10 +278,40 @@ public class ListaCadenasEnlaceSimple implements ListaCadenas {
         lista.add("cuatro");
 
         System.out.println("Probando método remove(int i):");
-        System.out.println(lista);
+        System.out.println(lista + " Talla: " + lista.size());
         System.out.println(lista.remove(1));
         System.out.println(lista.remove(0));
-        System.out.println(lista);
+        System.out.println(lista + " Talla: " + lista.size());
         System.out.println();
+
+        // probando remove(String s)
+        lista.clear();
+        lista.add("cero");
+        lista.add("uno");
+        lista.add("dos");
+        lista.add("tres");
+        lista.add("cuatro");
+
+        System.out.println(lista + " Talla: " + lista.size());
+        if (lista.remove("cero")) System.out.println("Cero eliminado.");
+        if (lista.remove("ocho")) System.out.println("Ocho eliminado."); else System.out.println("Ocho no está en la lista.");
+        if (lista.remove("cuatro")) System.out.println("Cuatro eliminado.");
+        System.out.println(lista + " Talla: " + lista.size());
+        System.out.println();
+
+        // probando set(int i, String s)
+        lista.clear();
+        lista.add("ocho");
+        lista.add("uno");
+        lista.add("tres");
+        lista.add("cinco");
+        lista.add("cuatro");
+
+        System.out.println(lista + " Talla: " + lista.size());
+        System.out.println("Cambiamos \"cero\" por " + lista.set(0, "cero"));
+        System.out.println("Cambiamos \"dos\" por " + lista.set(2, "dos"));
+        System.out.println("Cambiamos \"tres\" por " + lista.set(3, "tres"));
+        // System.out.println(lista.set(8, "ocho"));
+        System.out.println(lista + " Talla: " + lista.size());
     }
 }
