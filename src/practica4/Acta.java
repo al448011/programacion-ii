@@ -5,8 +5,8 @@ import java.util.NoSuchElementException;
 
 public class Acta {
     // Atributos
-    private String código; // Código de la asignatura
-    private int curso; // Curso académico
+    private String código;          // Código de la asignatura
+    private int curso;              // Curso académico
     private NotaEstudiante[] notas; // Datos de los estudiantes que hay en el acta
                                     // (ordenados de menor a mayor por DNI)
 
@@ -18,16 +18,33 @@ public class Acta {
     }
 
     // Métodos
-    public void calificar(String DNI, double nota) {
-        // Completar
+    public void calificar(String DNI, double nota) throws NoSuchElementException {
+        int inicio = 0;
+        int fin = notas.length - 1;
+
+        while (inicio <= fin) {
+            int medio = (inicio + fin) / 2;
+            if (notas[medio].getDNI().compareTo(DNI) > 0) {
+                fin = medio - 1;
+            }
+            else if (notas[medio].getDNI().compareTo(DNI) < 0)
+                inicio = medio + 1;
+            else if (notas[medio].getDNI().compareTo(DNI) == 0){
+                notas[medio].setNota(nota);
+                break;
+            } else
+                throw new NoSuchElementException();
+        }
     }
 
     public void enviarSMS(String[] vectorDNI) {
-        // Completar
+        for (String dni : vectorDNI){
+            if ()
+        }
     }
 
     public Acta siguienteConvocatoria() {
-        return null; // Completar
+        return null;
     }
 
     public String toString() {

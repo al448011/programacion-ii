@@ -6,6 +6,7 @@
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/src/practica2/ficherosAuxiliares" />
       <excludeFolder url="file://$MODULE_DIR$/src/practica3/excludedFiles" />
+      <excludeFolder url="file://$MODULE_DIR$/src/practica4/noLeerMyG" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
