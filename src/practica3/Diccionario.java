@@ -71,6 +71,19 @@ public class Diccionario {
         return resultado;
     }
 
+    public int cantidad(String unaCadena){
+        if (primero == null) return 0;
+
+        Nodo aux = primero;
+
+        while (aux != null){
+            if (unaCadena.equals(aux.cadena)) return aux.cantidad;
+            aux = aux.sig;
+        }
+
+        return 0;
+    }
+
     public String cadenaConMayorCantidad(){
 
         if (primero == null) return null;
@@ -126,5 +139,25 @@ public class Diccionario {
         System.out.println("Diccionario con empate: " + dicEmpate.cadenaConMayorCantidad());
 
         System.out.println();
+
+        // probando metodo cantidad(String unaCadena)
+        System.out.println(dic);
+
+        System.out.println("Cantidad de 'manzana': " + dic.cantidad("manzana"));
+        System.out.println("Cantidad de 'cereza': " + dic.cantidad("cereza"));
+        System.out.println("Cantidad de 'pera': " + dic.cantidad("pera"));
+        System.out.println("Cantidad de 'platano': " + dic.cantidad("platano"));
+
+        System.out.println("Cantidad de 'naranja': " + dic.cantidad("naranja"));
+
+        System.out.println("Diccionario vacío, cantidad de 'algo': " + dicVacio.cantidad("algo"));
+
+        System.out.println("Cantidad de cadena vacía: " + dic.cantidad(""));
+
+        dic.añadir("kiwi", 8);
+        System.out.println("Después de añadir 'kiwi', cantidad: " + dic.cantidad("kiwi"));
+
+        dic.añadir("pera", 4);
+        System.out.println("Después de añadir 4 más a 'pera', cantidad: " + dic.cantidad("pera"));
     }
 }
