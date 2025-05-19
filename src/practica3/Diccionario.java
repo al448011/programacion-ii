@@ -34,12 +34,27 @@ public class Diccionario {
             primero = new Nodo(unaCadena, unaCantidad, primero);
 
         else {
-            Nodo aux = primero;
+            if (primero.sig == null){
+                primero.sig = new Nodo(unaCadena,unaCantidad,null);
+                return;
+            }
 
+            Nodo actual = primero.sig;
+            Nodo anterior = primero;
+
+            while (actual.sig != null) {
+                if (actual.cadena.equals(unaCadena)){
+                    actual.cantidad += unaCantidad;
+                    return;
+                } else if (unaCadena.compareTo(actual.cadena) < 0){
+                    anterior.sig = new Nodo(unaCadena, unaCantidad, actual);
+                    return;
+                }
+                actual = actual.sig;
+                anterior = actual;
+            }
+            actual.sig = new Nodo(unaCadena,unaCantidad,null);
         }
-
-
-
     }
 
     public String toString() {
@@ -49,6 +64,7 @@ public class Diccionario {
 
         while (aux.sig != null){
             resultado += aux.cadena + "-->" + aux.cantidad + ", ";
+            aux = aux.sig;
         }
         resultado += aux.cadena + "-->" + aux.cantidad + "}";
 
