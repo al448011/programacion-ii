@@ -71,6 +71,25 @@ public class Diccionario {
         return resultado;
     }
 
+    public String cadenaConMayorCantidad(){
+
+        if (primero == null) return null;
+        if (primero.sig == null) return primero.cadena;
+        else {
+            Nodo mayorCantidad = primero;
+            Nodo aux = primero;
+
+            while (aux != null){
+                if (aux.cantidad > mayorCantidad.cantidad){
+                    mayorCantidad = aux;
+                }
+                aux = aux.sig;
+            }
+
+            return mayorCantidad.cadena;
+        }
+    }
+
     public static void main(String[] args) {
         Diccionario dic = new Diccionario();
 
@@ -83,5 +102,29 @@ public class Diccionario {
         dic.añadir("cereza", 5);
 
         System.out.println(dic);
+        System.out.println();
+
+        // probando metodo cadenaConMayorCantidad()
+        System.out.println("La cadena con mayor cantidad es: " + dic.cadenaConMayorCantidad());
+
+        Diccionario dicVacio = new Diccionario();
+        System.out.println("Diccionario vacío: " + dicVacio.cadenaConMayorCantidad());
+
+        Diccionario dicUnico = new Diccionario();
+        dicUnico.añadir("única", 10);
+        System.out.println("Diccionario con un elemento: " + dicUnico.cadenaConMayorCantidad());
+
+        Diccionario dicNegativos = new Diccionario();
+        dicNegativos.añadir("positivo", 5);
+        dicNegativos.añadir("negativo", -3);
+        System.out.println("Diccionario con negativos: " + dicNegativos.cadenaConMayorCantidad());
+
+        Diccionario dicEmpate = new Diccionario();
+        dicEmpate.añadir("primero", 7);
+        dicEmpate.añadir("segundo", 7);
+        dicEmpate.añadir("tercero", 3);
+        System.out.println("Diccionario con empate: " + dicEmpate.cadenaConMayorCantidad());
+
+        System.out.println();
     }
 }
