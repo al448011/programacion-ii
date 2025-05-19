@@ -24,23 +24,21 @@ public class Acta {
 
         while (inicio <= fin) {
             int medio = (inicio + fin) / 2;
-            if (notas[medio].getDNI().compareTo(DNI) > 0) {
+            int compara = notas[medio].getDNI().compareTo(DNI);
+            if ( compara > 0) {
                 fin = medio - 1;
-            }
-            else if (notas[medio].getDNI().compareTo(DNI) < 0)
+            } else if (compara < 0)
                 inicio = medio + 1;
-            else if (notas[medio].getDNI().compareTo(DNI) == 0){
+            else if (compara == 0){
                 notas[medio].setNota(nota);
-                break;
+                return;
             } else
                 throw new NoSuchElementException();
         }
     }
 
     public void enviarSMS(String[] vectorDNI) {
-        for (String dni : vectorDNI){
-            if ()
-        }
+        // Completar
     }
 
     public Acta siguienteConvocatoria() {
