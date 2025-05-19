@@ -50,8 +50,8 @@ public class Diccionario {
                     anterior.sig = new Nodo(unaCadena, unaCantidad, actual);
                     return;
                 }
-                actual = actual.sig;
                 anterior = actual;
+                actual = actual.sig;
             }
             actual.sig = new Nodo(unaCadena,unaCantidad,null);
         }
