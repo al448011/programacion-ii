@@ -7,6 +7,6 @@ public interface ColaTrabajos {
     int getTalla();
     boolean esVacía();
     // ATENCIÓN: Descomenta estas líneas para el ejercicio 4:
-    // void cancelar(String idUsuario);
-    // void adelantar(int idTrabajo);
+    void cancelar(String idUsuario);
+    void adelantar(int idTrabajo);
 }
