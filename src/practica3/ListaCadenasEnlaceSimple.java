@@ -48,15 +48,11 @@ public class ListaCadenasEnlaceSimple implements ListaCadenas {
             add(s);
         else if (i == 0) {
             primero = new Nodo(s, primero);
-            for (int j = 1; j < talla; j++)
-                aux = aux.sig;
             talla++;
         } else {
-            for (int j = 0; j < i; j++)
+            for (int j = 0; j < i - 1; j++)
                 aux = aux.sig;
-            aux = new Nodo(s, aux.sig);
-            for (int j = i; j < talla; j++)
-                aux = aux.sig;
+            aux.sig = new Nodo(s, aux.sig);
             talla++;
         }
 
@@ -82,7 +78,7 @@ public class ListaCadenasEnlaceSimple implements ListaCadenas {
         Nodo aux = primero;
 
         for (int i = 0; i < talla; i++){
-            if (Objects.equals(s, aux.dato)) return i;
+            if (aux.dato.equals(s)) return i;
             aux = aux.sig;
         }
 
@@ -95,14 +91,14 @@ public class ListaCadenasEnlaceSimple implements ListaCadenas {
         int ultimaCoincidencia = -1;
 
         for (int i = 0; i < talla; i++){
-            if (Objects.equals(s, aux.dato)) ultimaCoincidencia = i;
+            if (aux.dato.equals(s)) ultimaCoincidencia = i;
             aux = aux.sig;
         }
         return ultimaCoincidencia;
     }
 
     public boolean isEmpty() {
-        return primero == null;
+        return talla == 0;
     }
 
     public String remove(int i) throws IndexOutOfBoundsException {
@@ -128,23 +124,11 @@ public class ListaCadenasEnlaceSimple implements ListaCadenas {
         // en caso que la lista esté vacía
         if (primero == null) return false;
 
-        // en caso de que sea el primero
-        if (Objects.equals(primero.dato, s)){
-            primero = primero.sig;
-            talla--;
+        int i = indexOf(s);
+
+        if (i >= 0) {
+            remove(i);
             return true;
-        }
-
-        // para cualquier otro caso
-        Nodo aux = primero;
-
-        while (aux.sig != null){
-            if (Objects.equals(s, aux.dato)){
-                aux.sig = aux.sig.sig;
-                talla--;
-                return true;
-            }
-            aux = aux.sig;
         }
         return false;
     }
@@ -153,17 +137,12 @@ public class ListaCadenasEnlaceSimple implements ListaCadenas {
         if (i < 0 || i >= size()) throw new IndexOutOfBoundsException();
 
         Nodo aux = primero;
+        String resultado = "";
 
-        if (i == 0){
-            String resultado = primero.dato;
-            primero.dato = s;
-            return resultado;
-        }
-
-        for (int j = 0; j < i; j++)
+        for (int j = 0; j < i; j++) //Llego a i
             aux = aux.sig;
 
-        String resultado = aux.dato;
+        resultado = aux.dato;
         aux.dato = s;
 
         return resultado;
@@ -204,6 +183,7 @@ public class ListaCadenasEnlaceSimple implements ListaCadenas {
         System.out.println("Probando método add(int i, String s):");
         lista.add(0, "cero");
         lista.add(4, "cuatro");
+        lista.add(2, "dos_otravez");
         // lista.add(6, "seis");
         System.out.println(lista + " Talla: " + lista.size());
 
@@ -234,6 +214,7 @@ public class ListaCadenasEnlaceSimple implements ListaCadenas {
         System.out.println("Probando método indexOf(String s):");
         System.out.println(lista.indexOf("cero"));
         System.out.println(lista.indexOf("dos"));
+        System.out.println(lista.indexOf("cuatro"));
         System.out.println(lista.indexOf("cinco"));
 
         System.out.println();
@@ -249,6 +230,7 @@ public class ListaCadenasEnlaceSimple implements ListaCadenas {
         System.out.println(lista + " Talla: " + lista.size());
         System.out.println(lista.lastIndexOf("cero"));
         System.out.println(lista.lastIndexOf("dos"));
+        System.out.println(lista.lastIndexOf("cuatro"));
         System.out.println(lista.lastIndexOf("cinco"));
 
         System.out.println();
@@ -281,6 +263,7 @@ public class ListaCadenasEnlaceSimple implements ListaCadenas {
         System.out.println(lista + " Talla: " + lista.size());
         System.out.println(lista.remove(1));
         System.out.println(lista.remove(0));
+        //System.out.println(lista.remove(3)); //Devuelve exception
         System.out.println(lista + " Talla: " + lista.size());
         System.out.println();
 
@@ -308,9 +291,9 @@ public class ListaCadenasEnlaceSimple implements ListaCadenas {
         lista.add("cuatro");
 
         System.out.println(lista + " Talla: " + lista.size());
-        System.out.println("Cambiamos \"cero\" por " + lista.set(0, "cero"));
-        System.out.println("Cambiamos \"dos\" por " + lista.set(2, "dos"));
-        System.out.println("Cambiamos \"tres\" por " + lista.set(3, "tres"));
+        System.out.println("Cambiamos " + lista.set(0, "cero") + " por \"cero\"");
+        System.out.println("Cambiamos " + lista.set(2, "dos") + " por \"dos\"");
+        System.out.println("Cambiamos " + lista.set(3, "tres") + " por \"tres\"");
         // System.out.println(lista.set(8, "ocho"));
         System.out.println(lista + " Talla: " + lista.size());
     }
